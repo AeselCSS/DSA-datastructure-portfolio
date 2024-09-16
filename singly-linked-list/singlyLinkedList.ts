@@ -11,19 +11,29 @@ class ListNode<T> {
 
 class SinglyLinkedList<T> {
   private head: ListNode<T> | null = null;
+  private tail: ListNode<T> | null = null;
   private length: number = 0;
 
-  // Metoder der arbejder med data
+  // Adding at the front for O(1)
   add(data: T): void {
     const newNode = new ListNode(data);
     if (!this.head) {
-      this.head = newNode;
+      this.head = this.tail = newNode;
     } else {
-      let current = this.head;
-      while (current.next) {
-        current = current.next;
-      }
-      current.next = newNode;
+      newNode.next = this.head;
+      this.head = newNode;
+    }
+    this.length++;
+  }
+
+  // Add at the end in O(1)
+  addLast(data: T): void {
+    const newNode = new ListNode(data);
+    if (!this.tail) {
+      this.head = this.tail = newNode;
+    } else {
+      this.tail.next = newNode;
+      this.tail = newNode;
     }
     this.length++;
   }
@@ -33,6 +43,7 @@ class SinglyLinkedList<T> {
 
     if (this.head.data === data) {
       this.head = this.head.next;
+      if (!this.head) this.tail = null; // If list becomes empty
       this.length--;
       return;
     }
@@ -44,6 +55,7 @@ class SinglyLinkedList<T> {
 
     if (current.next) {
       current.next = current.next.next;
+      if (!current.next) this.tail = current; // Update tail if last node removed
       this.length--;
     }
   }
@@ -53,13 +65,7 @@ class SinglyLinkedList<T> {
   }
 
   getLast(): T | null {
-    if (!this.head) return null;
-
-    let current = this.head;
-    while (current.next) {
-      current = current.next;
-    }
-    return current.data;
+    return this.tail ? this.tail.data : null;
   }
 
   // Metoder der arbejder med nodes
@@ -138,7 +144,7 @@ class SinglyLinkedList<T> {
 
   // Metoder der arbejder med hele listen
   clear(): void {
-    this.head = null;
+    this.head = this.tail = null;
     this.length = 0;
   }
 
@@ -156,12 +162,5 @@ class SinglyLinkedList<T> {
     console.log(elements);
   }
 }
-
-// Eksempel på brug af SinglyLinkedList
-const list = new SinglyLinkedList<string>();
-list.add("enemy1");
-list.add("enemy2");
-list.add("enemy3");
-list.dumpList(); // ["enemy1", "enemy2", "enemy3"]
 
 export default SinglyLinkedList;
