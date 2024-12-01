@@ -145,3 +145,5 @@ dist
 
 # project specific
 *.js
+*.js.map
+*.d.ts
