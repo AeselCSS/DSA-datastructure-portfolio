@@ -1,4 +1,4 @@
-import {ListNode, DoublyLinkedList} from "./doublyLinkedList";
+import {ListNode, DoublyLinkedList} from "./doublyLinkedList.js";
 
 const list = new DoublyLinkedList<number>();
 
