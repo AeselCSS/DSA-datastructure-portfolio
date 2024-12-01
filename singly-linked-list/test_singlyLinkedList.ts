@@ -1,4 +1,4 @@
-import SinglyLinkedList from "./singlyLinkedList";
+import SinglyLinkedList from "./singlyLinkedList.js";
 
 // Example usage of SinglyLinkedList
 
