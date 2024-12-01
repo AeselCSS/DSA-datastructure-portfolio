@@ -1,0 +1,62 @@
+{
+  "compilerOptions": {
+    // Language and Environment
+    "target": "es2023",
+    "module": "NodeNext",
+    "lib": ["es2023", "dom"],
+    "moduleResolution": "nodenext",
+
+    // Strict Type-Checking
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "useUnknownInCatchVariables": true,
+    
+    // Additional Checks
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "noPropertyAccessFromIndexSignature": true,
+    
+    // Module Resolution
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+
+    // Emit
+    "outDir": ".",
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": true,
+    "removeComments": true,
+    
+    // Type Checking
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    
+    // Output Formatting
+    "pretty": true,
+    "forceConsistentCasingInFileNames": true,
+    
+    // Interop Constraints
+    "isolatedModules": true,
+    "skipLibCheck": true
+  },
+  "include": [
+    "grid/**/*.ts",
+    "queue/**/*.ts",
+    "stack/**/*.ts",
+    "circular-buffer/**/*.ts",
+    "doubly-linked-list/**/*.ts",
+    "singly-linked-list/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+  "compileOnSave": true
+}
