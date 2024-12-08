@@ -53,7 +53,8 @@
     "stack/**/*.ts",
     "circular-buffer/**/*.ts",
     "doubly-linked-list/**/*.ts",
-    "singly-linked-list/**/*.ts"
+    "singly-linked-list/**/*.ts",
+    "tree/**/*.ts",
   ],
   "exclude": [
     "node_modules"
