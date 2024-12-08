@@ -1,19 +1,20 @@
 import { Comparable } from './types.js';
-import TreeNode from './node.js';
+import BSTNode from './BSTreeNode.js';
 
-class AVLTree<T extends Comparable<T>> {
-    root: TreeNode<T> | null = null;
+class BSTree<T extends Comparable<T>> {
+    root: BSTNode<T> | null = null;
 
     insert(value: T): void {
         if (!this.root) {
-            this.root = new TreeNode(value);
+            this.root = new BSTNode(value);
         } else {
             this.root = this.root.insert(value);
         }
     }
 
-    find(value: T): TreeNode<T> | null {
-        return this.root?.find(value) ?? null;
+    find(value: T): T | null {
+        const node = this.root?.find(value);
+        return node ? node.value : null;
     }
 
     remove(value: T): void {
@@ -21,8 +22,9 @@ class AVLTree<T extends Comparable<T>> {
         this.root = this.root.remove(value);
     }
 
+    // Traversal methods
     inOrderTraversal(callback: (value: T) => void): void {
-        const traverse = (node: TreeNode<T> | null): void => {
+        const traverse = (node: BSTNode<T> | null): void => {
             if (!node) return;
             traverse(node.left);
             callback(node.value);
@@ -32,7 +34,7 @@ class AVLTree<T extends Comparable<T>> {
     }
 
     preOrderTraversal(callback: (value: T) => void): void {
-        const traverse = (node: TreeNode<T> | null): void => {
+        const traverse = (node: BSTNode<T> | null): void => {
             if (!node) return;
             callback(node.value);
             traverse(node.left);
@@ -40,9 +42,9 @@ class AVLTree<T extends Comparable<T>> {
         };
         traverse(this.root);
     }
-    
+
     postOrderTraversal(callback: (value: T) => void): void {
-        const traverse = (node: TreeNode<T> | null): void => {
+        const traverse = (node: BSTNode<T> | null): void => {
             if (!node) return;
             traverse(node.left);
             traverse(node.right);
@@ -51,6 +53,7 @@ class AVLTree<T extends Comparable<T>> {
         traverse(this.root);
     }
 
+    // Utility methods
     toArray(): T[] {
         const result: T[] = [];
         this.inOrderTraversal(value => result.push(value));
@@ -61,25 +64,6 @@ class AVLTree<T extends Comparable<T>> {
         this.root = null;
     }
 
-    visualize(): void {
-        if (!this.root) {
-            console.log("Empty tree");
-            return;
-        }
-
-        const print = (node: TreeNode<T> | null, prefix: string = "", isLeft: boolean = true): void => {
-            if (!node) return;
-            
-            console.log(prefix + (isLeft ? "├── " : "└── ") + node.value);
-            print(node.left, prefix + (isLeft ? "│   " : "    "), true);
-            print(node.right, prefix + (isLeft ? "│   " : "    "), false);
-        };
-
-        console.log(this.root.value);
-        print(this.root.left, "", true);
-        print(this.root.right, "", false);
-    }
-
     getSize(): number {
         let size = 0;
         this.inOrderTraversal(() => size++);
@@ -87,13 +71,8 @@ class AVLTree<T extends Comparable<T>> {
     }
 
     getMinValue(): T | null {
-        let current = this.root;
-        if (!current) return null;
-        
-        while (current.left) {
-            current = current.left;
-        }
-        return current.value;
+        if (!this.root) return null;
+        return this.root.findMin().value;
     }
 
     getMaxValue(): T | null {
@@ -105,6 +84,25 @@ class AVLTree<T extends Comparable<T>> {
         }
         return current.value;
     }
+
+    visualize(): void {
+        if (!this.root) {
+            console.log("Empty tree");
+            return;
+        }
+
+        const print = (node: BSTNode<T> | null, prefix: string = "", isLeft: boolean = true): void => {
+            if (!node) return;
+            
+            console.log(prefix + (isLeft ? "├── " : "└── ") + node.value);
+            print(node.left, prefix + (isLeft ? "│   " : "    "), true);
+            print(node.right, prefix + (isLeft ? "│   " : "    "), false);
+        };
+
+        console.log(this.root.value);
+        print(this.root.left, "", true);
+        print(this.root.right, "", false);
+    }
 }
 
-export default AVLTree;
+export default BSTree;

@@ -1,5 +1,5 @@
 import { Comparable } from './types.js';
-import AVLTree from './tree.js';
+import AVLTree from './AVLTree.js';
 
 // Example 1: Basic number storage with a wrapper
 class NumberWrapper implements Comparable<NumberWrapper> {
